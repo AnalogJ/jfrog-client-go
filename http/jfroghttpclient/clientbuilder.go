@@ -46,6 +46,7 @@ func (builder *jfrogHttpClientBuilder) Build() (rtHttpClient *JfrogHttpClient, e
 		SetClientCertPath((*rtHttpClient.JfrogServiceDetails).GetClientCertPath()).
 		SetClientCertKeyPath((*rtHttpClient.JfrogServiceDetails).GetClientCertKeyPath()).
 		SetContext(builder.ctx).
+		SetHttpClient((*rtHttpClient.JfrogServiceDetails).GetHttpClient()).
 		Build()
 	return
 }

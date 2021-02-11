@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"net/http"
 	"sync"
 	"time"
 
@@ -28,6 +29,7 @@ type ServiceDetails interface {
 	GetSshPassphrase() string
 	GetSshAuthHeaders() map[string]string
 	GetVersion() (string, error)
+	GetHttpClient() *http.Client
 
 	SetUrl(url string)
 	SetUser(user string)
@@ -41,6 +43,7 @@ type ServiceDetails interface {
 	SetSshKeyPath(sshKeyPath string)
 	SetSshPassphrase(sshPassphrase string)
 	SetSshAuthHeaders(sshAuthHeaders map[string]string)
+	SetHttpClient(httpClient *http.Client)
 
 	IsSshAuthHeaderSet() bool
 	IsSshAuthentication() bool
@@ -66,6 +69,7 @@ type CommonConfigFields struct {
 	SshPassphrase          string                      `json:"-"`
 	SshAuthHeaders         map[string]string           `json:"-"`
 	TokenMutex             sync.Mutex
+	HttpClient             *http.Client `json:"-"`
 }
 
 func (ccf *CommonConfigFields) GetUrl() string {
@@ -116,6 +120,10 @@ func (ccf *CommonConfigFields) GetSshAuthHeaders() map[string]string {
 	return ccf.SshAuthHeaders
 }
 
+func (ccf *CommonConfigFields) GetHttpClient() *http.Client {
+	return ccf.HttpClient
+}
+
 func (ccf *CommonConfigFields) SetUrl(url string) {
 	ccf.Url = url
 }
@@ -162,6 +170,9 @@ func (ccf *CommonConfigFields) SetSshPassphrase(sshPassphrase string) {
 
 func (ccf *CommonConfigFields) SetSshAuthHeaders(sshAuthHeaders map[string]string) {
 	ccf.SshAuthHeaders = sshAuthHeaders
+}
+func (ccf *CommonConfigFields) SetHttpClient(httpClient *http.Client) {
+	ccf.HttpClient = httpClient
 }
 
 func (ccf *CommonConfigFields) IsSshAuthHeaderSet() bool {
