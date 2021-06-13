@@ -68,9 +68,8 @@ func (builder *httpClientBuilder) AddClientCertToTransport(transport *http.Trans
 }
 
 func (builder *httpClientBuilder) Build() (*HttpClient, error) {
-
 	if builder.httpClient != nil {
-		//using a custom http.Client, pass-though.
+		// Using a custom http.Client, pass-though.
 		return &HttpClient{Client: builder.httpClient, ctx: builder.ctx}, nil
 	}
 
