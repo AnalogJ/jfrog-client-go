@@ -56,10 +56,14 @@ type ReportContent struct {
 // Row defines an entry of the report content
 type Row struct {
 	Cves                []Cve    `json:"cves,omitempty"`
+	Cvsv2MaxScore       float64  `json:"cvss2_max_score,omitempty"`
+	Cvsv3MaxScore       float64  `json:"cvss3_max_score,omitempty"`
 	Summary             string   `json:"summary,omitempty"`
 	Severity            string   `json:"severity,omitempty"`
+	SeveritySource      string   `json:"severity_source,omitempty"`
 	VulnerableComponent string   `json:"vulnerable_component,omitempty"`
 	ImpactedArtifact    string   `json:"impacted_artifact,omitempty"`
+	ImpactPath          []string `json:"impact_path,omitempty"`
 	Path                string   `json:"path,omitempty"`
 	FixedVersions       []string `json:"fixed_versions,omitempty"`
 	Published           string   `json:"published,omitempty"`
@@ -68,6 +72,8 @@ type Row struct {
 	Provider            string   `json:"provider,omitempty"`
 	Description         string   `json:"description,omitempty"`
 	References          []string `json:"references,omitempty"`
+	ExternalAdvisorySource string `json:"external_advisory_source,omitempty"`
+	ExternalAdvisorySeverity string `json:"external_advisory_severity,omitempty"`
 }
 
 // ReportRequestParams defines a report request
